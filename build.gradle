@@ -26,6 +26,7 @@ repositories {
 }
 
 ext {
+	set('otelVersion', "2.18.1")
 	set('springCloudVersion', "2025.0.0")
 	set('testcontainersVersion', "1.19.0")
 	set('okhttpVersion', "5.1.0")
@@ -33,6 +34,7 @@ ext {
 }
 
 dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	implementation 'org.springframework.boot:spring-boot-starter-data-r2dbc'
 	implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
@@ -41,6 +43,8 @@ dependencies {
 	implementation 'org.springframework.cloud:spring-cloud-stream-binder-rabbit'
 	implementation 'org.springframework.retry:spring-retry'
 
+	runtimeOnly 'io.micrometer:micrometer-registry-prometheus'
+	runtimeOnly "io.opentelemetry.javaagent:opentelemetry-javaagent:${otelVersion}"
 	runtimeOnly 'org.flywaydb:flyway-core'
 	runtimeOnly 'org.flywaydb:flyway-database-postgresql'
 	runtimeOnly 'org.postgresql:postgresql'
